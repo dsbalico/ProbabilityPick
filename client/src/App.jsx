@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { ImSpinner2 } from 'react-icons/im';
 import './App.css';
 import Ball from './components/Ball';
 import LineDesign from './components/LineDesign';
@@ -11,7 +12,8 @@ function App() {
     const [lottoType, setLottoType] = useState(null);
     const [method, setMethod] = useState(0);
     const [error, setError] = useState(false);
-    
+    const [loading, setLoading] = useState(false);
+
     const color = {
         42: "green",
         45: "orange",
@@ -34,23 +36,27 @@ function App() {
     function getBallColor() { return color[lottoType] || "gray"; };
 
     async function generateNumbersBasedOnProbability() {
+        let result;
+        
         await axios.get(`https://probability-pick.vercel.app/generate/${lottoType}`)
             .then(response => {
-                return response.data;
+                result = response.data;
             })
-            .catch(() => {
-                setError(true);
-                return null;
-            })
+            .catch(() => setError(true))
+        
+        return result;
     }
 
     async function handleGenerate() {
+        setLoading(true);
+
         if (method === 1) setResult(generateRandomNumbers(1, lottoType))
         else {
-            const result = await generateNumbersBasedOnProbability();
-
-            if(result) setResult(result);
+            await generateNumbersBasedOnProbability()
+                .then(result => setResult(result));
         }
+        
+        setLoading(false);
     }
     
     return (
@@ -108,7 +114,11 @@ function App() {
                 </div>
                 
                 {/* Generate Button */}
-                <button onClick={() => handleGenerate()} disabled={lottoType === null} className='py-8 bg-indigo-700 mb-1 w-full text-white text-xl hover:bg-indigo-600 duration-500 transition-all  tracking-widest font-bold rounded-b-sm  disabled:border-4 disabled:hover:bg-indigo-700 border-dashed border-indigo-900'>
+                <button onClick={() => handleGenerate()} disabled={lottoType === null} className='flex justify-center gap-2 py-8 bg-indigo-700 mb-1 w-full text-white text-xl hover:bg-indigo-600 duration-500 transition-all  tracking-widest font-bold rounded-b-sm  disabled:border-4 disabled:hover:bg-indigo-700 border-dashed border-indigo-900'>
+                    {
+                        loading ? <ImSpinner2 className='self-center animate-spin' />
+                        : null
+                    }
                     GENERATE
                 </button>
                 
