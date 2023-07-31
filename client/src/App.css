@@ -1,0 +1,44 @@
+.bg-gradient-radial-green {
+  background: radial-gradient(circle at 65% 15%, white 1px, #22c55e 3%, #15803d 60%, #22c55e 100%);
+}
+
+.bg-gradient-radial-orange {
+  background: radial-gradient(circle at 65% 15%, white 1px, #f97316 3%, #c2410c 60%, #f97316 100%);
+}
+
+.bg-gradient-radial-red {
+  background: radial-gradient(circle at 65% 15%, white 1px, #ef4444 3%, #b91c1c 60%, #ef4444 100%);
+}
+
+.bg-gradient-radial-amber {
+  background: radial-gradient(circle at 65% 15%, white 1px, #d97706 3%, #78350f 60%, #d97706 100%);
+}
+
+.bg-gradient-radial-lime {
+  background: radial-gradient(circle at 65% 15%, white 1px, #84cc16 3%, #4d7c0f 60%, #84cc16 100%);
+}
+
+.bg-gradient-radial-gray {
+  background: radial-gradient(circle at 65% 15%, white 1px, #64748b 3%, #334155 60%, #64748b 100%);
+}
+
+
+
+.popup {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
