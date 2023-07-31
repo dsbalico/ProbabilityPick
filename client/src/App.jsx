@@ -34,7 +34,7 @@ function App() {
     function getBallColor() { return color[lottoType] || "gray"; };
 
     async function generateNumbersBasedOnProbability() {
-        await axios.get(`https://probability-pick/generate/${lottoType}`)
+        await axios.get(`https://probability-pick.vercel.app/generate/${lottoType}`)
             .then(response => {
                 return response.data;
             })
